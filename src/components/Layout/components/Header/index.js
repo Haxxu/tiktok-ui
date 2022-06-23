@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner, faMagnifyingGlass, faEllipsisVertical, faEarthAsia, faCircleQuestion, faKeyboard } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
+import { faCircleXmark, faSpinner, faMagnifyingGlass, faEllipsisVertical, faEarthAsia, faCircleQuestion, faKeyboard, faCloudArrowUp, faMessage, faUser, faCoins, faGear, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { AiOutlineCloudUpload } from 'react-icons/ai';
+import { BiMessageAltMinus } from 'react-icons/bi';
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
+import 'tippy.js/dist/tippy.css';
 
 import Button from '~/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -47,6 +51,8 @@ const MENU_ITEMS = [
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
 
+  const currentUser = true;
+
   useEffect(() => {
     setTimeout(() => {
       setSearchResult([])
@@ -63,12 +69,37 @@ function Header() {
     }
   }
 
+  const userMenu = [
+    {
+      icon: <FontAwesomeIcon icon={faUser} />,
+      title: 'View profile',
+      to: '/@nva'
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCoins} />,
+      title: 'Get coins',
+      to: '/coin'
+    },
+    {
+      icon: <FontAwesomeIcon icon={faGear} />,
+      title: 'Settings',
+      to: '/settings'
+    },
+    ...MENU_ITEMS,
+    {
+      icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+      title: 'Log out',
+      to: '/logout',
+      separate: true,
+    },
+  ]
+
   return (  
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
         <img src={image.logo} alt='Tiktok' />
 
-        <Tippy
+        <HeadlessTippy
           interactive
           visible={searchResult.length > 0 ? true : false}
           render={attrs => (
@@ -93,21 +124,50 @@ function Header() {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
-        </Tippy>
+        </HeadlessTippy>
 
-        <div className={cx('action')}>
-          <Button>Upload</Button>
-          <Button primary>Login</Button>
-            
+        <div className={cx('actions')}>
+          {currentUser ? (
+            <>
+              <Tippy 
+                delay={[0, 200]}
+                content='Upload video' 
+                placement='bottom'
+              >
+                <button className={cx('action-btn')}>
+                  <AiOutlineCloudUpload />
+                  {/* <FontAwesomeIcon icon={faCloudArrowUp} /> */}
+                </button>
+              </Tippy>
+              <button className={cx('action-btn')}>
+                <BiMessageAltMinus />
+                {/* <FontAwesomeIcon icon={faMessage} /> */}
+              </button>
+            </>
+          ) : (
+            <>
+              <Button>Upload</Button>
+              <Button primary>Login</Button>
+            </>
+          )}              
           <Menu
-						items={MENU_ITEMS}
+            items={ currentUser ? userMenu : MENU_ITEMS}
             onChange={handleMenuChange}
-					>
-						<button className={cx('more-btn')}>
-							<FontAwesomeIcon icon={faEllipsisVertical} />
-						</button>
-					</Menu>
+          >
+            {currentUser ? (
+              <img 
+                src='https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tiktok-obj/1639039023536129.jpeg?x-expires=1656136800&x-signature=JkzsJJL6WPdD0KkQMAqkBabUwVo%3D'
+                className={cx('user-avatar')} 
+                alt='Nguyen Van A' 
+              />
+            ) : (
+              <button className={cx('more-btn')}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+            )}
+          </Menu>
         </div>
+
       </div>
     </header>       
   );
