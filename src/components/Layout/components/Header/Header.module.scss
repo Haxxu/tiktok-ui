@@ -1,132 +1,130 @@
 .wrapper {
-  --search-border-radius: 92px;
-  --search-height: 46px;
-  --search-top-spacer: 9px;
-  --search-btn-width: 52px;
+    --search-border-radius: 92px;
+    --search-height: 46px;
+    --search-top-spacer: 9px;
+    --search-btn-width: 52px;
 
-  width: 100%;
-  height: var(--default-layout-header-height, 60px);
-  box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    height: var(--default-layout-header-height, 60px);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    display: flex;
+    justify-content: center;
 }
 
 .inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: var(--default-layout-width, 1150px);
-  padding: 0 var(--default-layout-horizontal-spacer);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: var(--default-layout-width, 1150px);
+    padding: 0 var(--default-layout-horizontal-spacer);
 }
 
-.search, 
+.search,
 .search-result {
-  width: 361px;
+    width: 361px;
 }
 
 .search {
-  position: relative;
-  display: flex;
-  height: var(--search-height);
-  background-color: rgba(22, 24, 35, 0.06);
-  border: 1.5px solid transparent;
-  border-radius: var(--search-border-radius);
-  padding-left: 16px;
+    position: relative;
+    display: flex;
+    height: var(--search-height);
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1.5px solid transparent;
+    border-radius: var(--search-border-radius);
+    padding-left: 16px;
 
+    input {
+        flex: 1;
+        height: 100%;
+        color: var(--black);
+        font-size: 1.6rem;
+        font-weight: 400;
+        background-color: transparent;
+        caret-color: var(--primary);
+    }
 
-  input {
-    flex: 1;
-    height: 100%;
-    color: var(--black);
-    font-size: 1.6rem;
-    font-weight: 400;
-    background-color: transparent;
-    caret-color: var(--primary);
-  }
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
 
-  input:not(:placeholder-shown) ~ .search-btn {
-    color: rgba(22, 24, 35, 0.75);
-  }
+    &::after {
+        content: '';
+        position: absolute;
+        top: var(--search-top-spacer);
+        right: var(--search-btn-width);
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
+        background-color: rgba(22, 24, 35, 0.12);
+    }
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: var(--search-top-spacer);
-    right: var(--search-btn-width);
-    width: 1px;
-    height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-    background-color: rgba(22, 24, 35, 0.12);
-  }
-
-  &:focus-within {
-    border-color: rgba(22, 24, 35, 0.2);
-  }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
 }
 
 .search-title {
-  padding: 5px 12px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: rgba(22, 24, 35, 0.5);
+    padding: 5px 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
 }
 
 .clear,
 .loading {
-  position: absolute;
-  right: calc(var(--search-btn-width) + 16px);
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgba(22, 24, 35, 0.34)
+    position: absolute;
+    right: calc(var(--search-btn-width) + 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(22, 24, 35, 0.34);
 }
 
 .search-btn {
-  width: var(--search-btn-width);
-  height: 100%;
-  border-top-right-radius: var(--search-border-radius);
-  border-bottom-right-radius: var(--search-border-radius);
-  cursor: pointer;
-  font-size: 1.8rem;
-  color: rgba(22, 24, 35, 0.34);
+    width: var(--search-btn-width);
+    height: 100%;
+    border-top-right-radius: var(--search-border-radius);
+    border-bottom-right-radius: var(--search-border-radius);
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: rgba(22, 24, 35, 0.34);
 
-  &:hover {
-    background-color: rgba(22, 24, 35, 0.03);
-  }
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
 
-  &:active {
-    background-color: rgba(22, 24, 35, 0.06);
-  }
+    &:active {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
 }
-
 
 // Actions
 .actions {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .more-btn {
-  font-size: 2rem;
-  padding: 0 28px;
-  background-color: transparent;
-  cursor: pointer;
+    font-size: 2rem;
+    padding: 0 28px;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .action-btn {
-  display: flex;
-  align-items: center;
-  font-size: 2.8rem;
-  color: #161823;
-  background-color: transparent;
-  padding: 4px 10px;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 2.8rem;
+    color: #161823;
+    background-color: transparent;
+    padding: 4px 10px;
+    cursor: pointer;
 }
 
 .user-avatar {
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-left: 12px;
-  cursor: pointer;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 12px;
+    cursor: pointer;
 }
