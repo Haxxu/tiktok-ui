@@ -8,7 +8,7 @@
     border: 1px solid transparent;
     font-size: 1.6rem;
     font-weight: 700;
-    font-family: 'IBM Plex Sans', 'ProximaNova', 'Poppins', 'Roboto', sans-serif;
+    font-family: var(--font-family);
     cursor: pointer;
     background-color: var(--white);
     user-select: none;
